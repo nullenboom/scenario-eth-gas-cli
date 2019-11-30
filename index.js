@@ -3,16 +3,32 @@
 const chalk = require('chalk');
 const clear = require('clear');
 const figlet = require('figlet');
+const fs = require('fs');
 
 const files = require('./lib/files');
+const inquirer = require('./lib/inquirer')
 
 clear();
 
 console.log(
   chalk.yellow(
-    figlet.textSync('Scenario CLI', { horizontalLayout: 'full' })
+    figlet.textSync('Scenario Gas CLI', { horizontalLayout: 'full' })
   )
 );
+
+if (!files.directoryExists('scenario-gas-reports')) {
+  console.log(chalk.red('No Reports found'));
+  process.exit();
+}
+
+const run = async () => {
+  const credentials = await inquirer.askGithubCredentials();
+  console.log(credentials);
+  const filelist = fs.readdirSync('./scenario-gas-reports')
+  console.log(filelist);
+};
+
+run();
 
 /*const run = async () => {
   try {

@@ -1,0 +1,72 @@
+{
+	"creation": "17-11-2019 19:18:15",
+	"analyzedScenarios": 1,
+	"scenarios": [
+		{
+			"scenarioName": "Parity Numbers Scenario",
+			"analyzedVariants": 2,
+			"minTotalGasUsed": 152052,
+			"maxTotalGasUsed": 156460,
+			"variants": [
+				{
+					"variantName": "Contract: Parity_Binary",
+					"totalGasUsed": 152052,
+					"methods": [
+						{
+							"contractName": "ParityBinary",
+							"methodName": "checkParity",
+							"numberOfCalls": 1,
+							"averageGasUsed": 42187,
+							"totalGasUsed": 42187,
+							"percentageOfScenario": 0.2774511351379791,
+							"gasUsedValues": [
+								42187
+							]
+						}
+					],
+					"deployments": [
+						{
+							"contractName": "ParityBinary",
+							"numberOfDeployments": 1,
+							"averageGasUsed": 109865,
+							"totalGasUsed": 109865,
+							"percentageOfScenario": 0.7225488648620209,
+							"gasUsedValues": [
+								109865
+							]
+						}
+					]
+				},
+				{
+					"variantName": "Contract: Parity_Modulo",
+					"totalGasUsed": 156460,
+					"methods": [
+						{
+							"contractName": "ParityModulo",
+							"methodName": "checkParity",
+							"numberOfCalls": 1,
+							"averageGasUsed": 42237,
+							"totalGasUsed": 42237,
+							"percentageOfScenario": 0.26995398184839575,
+							"gasUsedValues": [
+								42237
+							]
+						}
+					],
+					"deployments": [
+						{
+							"contractName": "ParityModulo",
+							"numberOfDeployments": 1,
+							"averageGasUsed": 114223,
+							"totalGasUsed": 114223,
+							"percentageOfScenario": 0.7300460181516042,
+							"gasUsedValues": [
+								114223
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
