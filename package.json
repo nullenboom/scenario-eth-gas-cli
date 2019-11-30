@@ -1,0 +1,29 @@
+{
+  "name": "scenario-eth-gas-cli",
+  "version": "1.0.0",
+  "description": "cli for read and analyzing data created by scenario-eth-gas-reporter",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"currently not implemented\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nullenboom/scenario-eth-gas-cli.git"
+  },
+  "keywords": [
+    "ethereum",
+    "scenario",
+    "gas"
+  ],
+  "author": "Niklas Ullenboom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nullenboom/scenario-eth-gas-cli/issues"
+  },
+  "homepage": "https://github.com/nullenboom/scenario-eth-gas-cli#readme",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "clear": "^0.1.0",
+    "figlet": "^1.2.4"
+  }
+}
