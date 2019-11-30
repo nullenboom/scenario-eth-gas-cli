@@ -22,10 +22,11 @@ if (!files.directoryExists('scenario-gas-reports')) {
 }
 
 const run = async () => {
-  const credentials = await inquirer.askGithubCredentials();
+	  const filelist = fs.readdirSync('./scenario-gas-reports')
+
+  const credentials = await inquirer.askWhichFile(filelist);
   console.log(credentials);
-  const filelist = fs.readdirSync('./scenario-gas-reports')
-  console.log(filelist);
+
 };
 
 run();

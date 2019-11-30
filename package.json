@@ -4,7 +4,10 @@
   "description": "cli for read and analyzing data created by scenario-eth-gas-reporter",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"currently not implemented\""
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+ "bin": {
+    "scenariocli": "./index.js"
   },
   "repository": {
     "type": "git",
