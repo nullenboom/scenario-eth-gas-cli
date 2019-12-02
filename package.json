@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
- "bin": {
+  "bin": {
     "scenariocli": "./index.js"
   },
   "repository": {
@@ -29,6 +29,9 @@
     "clear": "^0.1.0",
     "figlet": "^1.2.4",
     "fs": "0.0.1-security",
-    "inquirer": "^7.0.0"
+    "inquirer": "^7.0.0",
+    "scenario-eth-gas-reporter": "file:scenario-eth-gas-reporter-0.0.1.tgz",
+    "scenario-eth-gas-table": "^1.0.1",
+    "shelljs": "^0.8.3"
   }
 }
