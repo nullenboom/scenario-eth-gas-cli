@@ -59,3 +59,13 @@ typings/
 
 # next.js build output
 .next
+
+# mock reports
+scenario-gas-reports/
+
+# truffle folder
+build/
+contracts/
+migrations/
+test/
+truffle-config.js
