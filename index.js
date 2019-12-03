@@ -9,6 +9,7 @@ const table = require('scenario-eth-gas-table');
 
 const files = require('./lib/files');
 const inquirer = require('./lib/inquirer')
+const utils = require('./lib/utils')
 
 clear();
 
@@ -53,6 +54,10 @@ const run = async () => {
 			console.log("Table for Json File: " + file)
 			table.generateTableFromJson(json, true);
 		})
+	}
+	if (job.job === 'Overview over EDCCs') {
+		const contracts = utils.getContractMethodInfos("contracts");
+		console.log("CONTRACTS: " + contracts);
 	}
 
 
