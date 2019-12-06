@@ -31,16 +31,21 @@ const run = async () => {
 
 		const testlist = fs.readdirSync('./test')
 
-		const tests = await inquirer.askWhichTest(testlist)
-		console.log(tests)
+		const testsAnswer = await inquirer.askWhichTest(testlist)
+
+		const tests = testsAnswer.tests;
 		var shell = require('shelljs')
 		shell.cd("lib");
 		shell.exec("start_rcp.sh")
 		shell.cd('..');
 		shell.exec("truffle migrate")
-		shell.exec("truffle test")
+		tests.forEach(test => {
+			console.log(test)
+			shell.exec("truffle test ./test/"+test )
+		});
+		
 
-		console.log(chalk.red('test'))
+		console.log(chalk.red('Tests run successfully'))
 	}
 	if (job.job === 'See result report again') {
 
