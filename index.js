@@ -15,7 +15,7 @@ clear();
 
 console.log(
 	chalk.yellow(
-		figlet.textSync('Scenario Gas CLI123', { horizontalLayout: 'full' })
+		figlet.textSync('Scenario Eth Gas CLI', { horizontalLayout: 'full' })
 	)
 );
 
@@ -28,18 +28,18 @@ const run = async () => {
 
 	const job = await inquirer.askWhatJob();
 	if (job.job === 'Run new Test') {
-		
+
 		const testlist = fs.readdirSync('./test')
-		
+
 		const tests = await inquirer.askWhichTest(testlist)
 		console.log(tests)
-        var shell = require('shelljs')
+		var shell = require('shelljs')
 		shell.cd("lib");
 		shell.exec("start_rcp.sh")
 		shell.cd('..');
 		shell.exec("truffle migrate")
 		shell.exec("truffle test")
-		
+
 		console.log(chalk.red('test'))
 	}
 	if (job.job === 'See result report again') {
@@ -57,7 +57,18 @@ const run = async () => {
 	}
 	if (job.job === 'Overview over EDCCs') {
 		const contracts = utils.getContractMethodInfos("contracts");
-		console.log("CONTRACTS: " + contracts);
+
+		contracts.filter(contract => contract.name != 'Migrations').forEach(contract => {
+		 console.log("Contract Name: " + contract.name)
+		console.group();
+		 console.log("Methods:")
+		console.group();
+		 contract.methods.forEach(method => {
+			 console.log("Name: " + method.methodName + " Parameter(s): ")
+		})
+		console.groupEnd();
+		console.groupEnd();
+		})
 	}
 
 
