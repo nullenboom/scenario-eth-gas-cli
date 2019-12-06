@@ -27,11 +27,16 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "clear": "^0.1.0",
+    "ethers": "^4.0.40",
     "figlet": "^1.2.4",
     "fs": "0.0.1-security",
+    "fs-readdir-recursive": "^1.1.0",
     "inquirer": "^7.0.0",
-    "scenario-eth-gas-reporter": "file:scenario-eth-gas-reporter-0.0.1.tgz",
+    "path": "^0.12.7",
+    "scenario-eth-gas-reporter": "0.0.1",
     "scenario-eth-gas-table": "^1.0.1",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.3",
+    "solidity-parser-antlr": "^0.4.11",
+    "web3": "^1.2.4"
   }
 }
