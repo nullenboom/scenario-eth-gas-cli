@@ -1,6 +1,6 @@
 {
   "name": "scenario-eth-gas-cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "cli for read and analyzing data created by scenario-eth-gas-reporter",
   "main": "index.js",
   "scripts": {
