@@ -9,7 +9,9 @@ const table = require('scenario-eth-gas-table');
 
 const files = require('./lib/files');
 const inquirer = require('./lib/inquirer')
-const utils = require('./lib/utils')
+const utils = require('./lib/contractInfos')
+const testExecutor = require('./lib/testExecutor')
+const tableGenerator = require('./lib/tableGenerator')
 
 clear();
 
@@ -28,52 +30,17 @@ const run = async () => {
 
 	const job = await inquirer.askWhatJob();
 	if (job.job === 'Run new Test') {
-
-		const testlist = fs.readdirSync('./test')
-
-		const testsAnswer = await inquirer.askWhichTest(testlist)
-
-		const tests = testsAnswer.tests;
-		var shell = require('shelljs')
-		shell.cd("lib");
-		shell.exec("start_rcp.sh")
-		shell.cd('..');
-		shell.exec("truffle migrate")
-		tests.forEach(test => {
-			console.log(test)
-			shell.exec("truffle test ./test/"+test )
-		});
 		
-
-		console.log(chalk.red('Tests run successfully'))
+		testExecutor.askWhichTestAndExecute();
 	}
 	if (job.job === 'See result report again') {
-
-
-		const filelist = fs.readdirSync('./scenario-gas-reports')
-
-		const files = await inquirer.askWhichFile(filelist);
-		files.files.forEach(file => {
-			let rawdata = fs.readFileSync('./scenario-gas-reports/' + file);
-			let json = JSON.parse(rawdata)
-			console.log("Table for Json File: " + file)
-			table.generateTableFromJson(json, true);
-		})
+		
+		tableGenerator.askWhichTableAndGenerate();
+		
 	}
 	if (job.job === 'Overview over EDCCs') {
-		const contracts = utils.getContractMethodInfos("contracts");
-
-		contracts.filter(contract => contract.name != 'Migrations').forEach(contract => {
-		 console.log("Contract Name: " + contract.name)
-		console.group();
-		 console.log("Methods:")
-		console.group();
-		 contract.methods.forEach(method => {
-			 console.log("Name: " + method.methodName + " Parameter(s): ")
-		})
-		console.groupEnd();
-		console.groupEnd();
-		})
+		
+		utils.displayContractMethodInfos();
 	}
 
 
