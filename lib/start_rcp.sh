@@ -12,7 +12,8 @@
 testrpc_port=8545
 
 testrpc_running() {
-  nc -z localhost "$testrpc_port"
+   return false;
+   //npx nc -z localhost "$testrpc_port"
 }
 
 start_testrpc() {
@@ -28,8 +29,8 @@ else
   start_testrpc
 fi
 
-echo "now sleep 5"
-# Buidler is super fast on launch
-sleep 5
+echo "now sleep 1"
+
+sleep 10
 
 echo "awake"
