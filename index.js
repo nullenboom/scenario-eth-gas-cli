@@ -6,10 +6,11 @@ const contractInfos = require('./lib/contractInfos')
 const testExecutor = require('./lib/testExecutor')
 const tableGenerator = require('./lib/tableGenerator')
 
+const running = true;
 
 cli.createCliHeader();
 
-if (!cli.checkScenarioGasReports()) {
+if(!cli.isTruffleProject()){
 	process.exit();
 }
 
@@ -23,13 +24,12 @@ const run = async () => {
 	if (job.job === 'See result report again') {
 		const filesAnswer = await cli.askWhichFile();
 		tableGenerator.generateTableForFiles(filesAnswer);
-		
 	}
 	if (job.job === 'Overview over EDCCs') {
 		contractInfos.displayContractMethodInfos();
 	}
-
-
+	
+	
 };
 
 run();

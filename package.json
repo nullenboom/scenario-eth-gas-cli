@@ -38,6 +38,7 @@
     "scenario-eth-gas-table": "^1.0.3",
     "shelljs": "^0.8.3",
     "solidity-parser-antlr": "^0.4.11",
+    "tcp-port-used": "^1.0.1",
     "web3": "^1.2.4"
   }
 }
