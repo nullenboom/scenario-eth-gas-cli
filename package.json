@@ -8,7 +8,6 @@
   },
   "bin": {
     "scenario-eth-gas-cli": "./index.js",
-    "startRCP": "./lib/start_rcp.sh"
   },
   "repository": {
     "type": "git",
