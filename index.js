@@ -5,16 +5,26 @@ const cli = require('./lib/cli')
 const contractInfos = require('./lib/contractInfos')
 const testExecutor = require('./lib/testExecutor')
 const tableGenerator = require('./lib/tableGenerator')
+const setup = require('./lib/setupChecker')
 
-const running = true;
 
 cli.createCliHeader();
 
-if(!cli.isTruffleProject()){
-	process.exit();
-}
-
 const run = async () => {
+	
+	if (!setup.isTruffleProject()) {
+		process.exit();
+	}
+
+	if (!setup.isScenarioReporterInstalled()) {
+		const setupStatus = await setup.setupScenarioReporter();
+		if (!setupStatus) {
+			console.log("Setup of scenario-eth-gas-reporter unsuccessful, modul will be closed")
+			process.exit();
+		}
+	}
+	
+	setup.checkTruffleConfig();
 
 	const job = await cli.askWhatJob();
 	if (job.job === 'Run new Test') {
@@ -28,8 +38,8 @@ const run = async () => {
 	if (job.job === 'Overview over EDCCs') {
 		contractInfos.displayContractMethodInfos();
 	}
-	
-	
+
+
 };
 
 run();
