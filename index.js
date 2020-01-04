@@ -8,38 +8,48 @@ const tableGenerator = require('./lib/tableGenerator')
 const setup = require('./lib/setupChecker')
 
 
+var exit = false;
+
 cli.createCliHeader();
 
-const run = async () => {
-	
-	if (!setup.isTruffleProject()) {
-		process.exit();
-	}
-
-	if (!setup.isScenarioReporterInstalled()) {
-		const setupStatus = await setup.setupScenarioReporter();
-		if (!setupStatus) {
-			console.log("Setup of scenario-eth-gas-reporter unsuccessful, modul will be closed")
-			process.exit();
-		}
-	}
-	
-	setup.checkTruffleConfig();
+const cliDialog = async () => {
 
 	const job = await cli.askWhatJob();
 	if (job.job === 'Run new Test') {
 		const testsAnswer = await cli.askWhichTest();
-		testExecutor.executeTests(testsAnswer);
+		await testExecutor.executeTests(testsAnswer);
+		return false;
 	}
 	if (job.job === 'See result report again') {
 		const filesAnswer = await cli.askWhichFile();
 		tableGenerator.generateTableForFiles(filesAnswer);
+		return false;
 	}
 	if (job.job === 'Overview over EDCCs') {
 		contractInfos.displayContractMethodInfos();
+		return false;
+	}
+	
+	if(job.job === 'Exit') {
+		console.log("Module will be closed");
+		return true;
 	}
 
 
 };
 
-run();
+const checkSetupAndRunDialog = async () => {
+	if (!setup.isTruffleProject()) {
+		process.exit();
+	}
+		
+	while (!exit) {
+		exit = await cliDialog();
+	}
+}
+
+checkSetupAndRunDialog();
+
+
+
+
