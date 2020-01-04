@@ -1,36 +1,19 @@
 #!/usr/bin/env bash
 
-# Executes cleanup function at script exit.
- 
- cleanup() {
-  # Kill the testrpc instance that we started (if we started one and if it's still running).
-  if [ -n "$testrpc_pid" ] && ps -p $testrpc_pid > /dev/null; then
-    kill -9 $testrpc_pid
-  fi
-}
-
-testrpc_port=8545
-
-testrpc_running() {
-   return false;
-   //npx nc -z localhost "$testrpc_port"
-}
+testrpc_port=$1; 
+#definedport
 
 start_testrpc() {
-  npx ganache-cli --gasLimit 8000000 "${accounts[@]}" > /dev/null &
+  npx ganache-cli -p $testrpc_port --gasLimit 8000000 "${accounts[@]}" > /dev/null &
   testrpc_pid=$!
 }
 
+echo "Starting our own ganache-cli instance"
+start_testrpc
 
-if testrpc_running; then
-  echo "Using existing client instance"
-else
-  echo "Starting our own ganache-cli instance"
-  start_testrpc
-fi
 
-echo "now sleep 1"
-
-sleep 10
+echo "now sleep 5"
+echo "Port: $testrpc_port"
+sleep 20
 
 echo "awake"
