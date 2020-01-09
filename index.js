@@ -39,7 +39,12 @@ const cliDialog = async () => {
 };
 
 const checkSetupAndRunDialog = async () => {
-	if (!setup.isTruffleProject()) {
+	
+	var truffleProject = setup.isTruffleProject(); 
+	var reports = setup.isReports();
+	
+	if (!truffleProject && !reports) {
+		console.log("Directory is not a Truffle Project and contains no scenario reports. Please use this Module in a Truffle Project or provide scenario-eth-gas-reports");
 		process.exit();
 	}
 		
