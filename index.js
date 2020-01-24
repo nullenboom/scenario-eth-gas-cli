@@ -5,7 +5,7 @@ const cli = require('./lib/cli')
 const contractInfos = require('./lib/contractInfos')
 const testExecutor = require('./lib/testExecutor')
 const tableGenerator = require('./lib/tableGenerator')
-const setup = require('./lib/setupChecker')
+const fileHandling = require('./lib/fileHandling')
 
 
 var exit = false;
@@ -38,22 +38,25 @@ const cliDialog = async () => {
 
 };
 
-const checkSetupAndRunDialog = async () => {
-	
-	var truffleProject = setup.isTruffleProject(); 
-	var reports = setup.isReports();
+const checkDir = async () => {
+	var truffleProject = fileHandling.isTruffleProject(); 
+	var reports = fileHandling.isReportAvailable();
 	
 	if (!truffleProject && !reports) {
 		console.log("Directory is not a Truffle Project and contains no scenario reports. Please use this Module in a Truffle Project or provide scenario-eth-gas-reports");
 		process.exit();
 	}
-		
+}
+
+const run = async () => {
+	
+	checkDir()
 	while (!exit) {
 		exit = await cliDialog();
 	}
 }
 
-checkSetupAndRunDialog();
+run();
 
 
 
